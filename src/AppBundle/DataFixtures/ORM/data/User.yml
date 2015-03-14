@@ -1,0 +1,6 @@
+AppBundle\Entity\User:
+    user0:
+        username: bob
+        email: bob@example.org
+        plainPassword: night
+        enabled: true

@@ -1,0 +1,7 @@
+user:
+    type: rest
+    resource: AppBundle\Controller\UserController
+
+quote:
+    type: rest
+    resource: AppBundle\Controller\QuoteController

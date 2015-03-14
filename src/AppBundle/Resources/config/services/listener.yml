@@ -1,0 +1,6 @@
+services:
+    app.exception_listener:
+        class:        AppBundle\Listener\ExceptionListener
+        arguments:    [@fos_rest.view_handler, @logger]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

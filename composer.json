@@ -7,7 +7,7 @@
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.5.0",
         "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",
         "doctrine/dbal": "<2.5",
@@ -21,7 +21,11 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle": "~0.13.0",
         "friendsofsymfony/rest-bundle": "~1.5",
-        "nelmio/api-doc-bundle": "~2.7.0"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "nelmio/api-doc-bundle": "~2.7.0",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "hautelook/alice-bundle": "~0.2",
+        "gogocar/dto": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -60,5 +64,11 @@
         "branch-alias": {
             "dev-master": "2.6-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/Night75/dto-gogocar"
+        }
+    ]
 }

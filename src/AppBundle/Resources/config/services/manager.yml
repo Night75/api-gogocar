@@ -1,0 +1,13 @@
+services:
+     app.abstract_manager:
+         class: AppBundle\Manager\AbstractManager
+         arguments: [@doctrine.orm.entity_manager]
+         abstract: true
+
+     app.user_manager:
+         class: AppBundle\Manager\UserManager
+         parent: app.abstract_manager
+
+     app.quote_manager:
+         class: AppBundle\Manager\QuoteManager
+         parent: app.abstract_manager

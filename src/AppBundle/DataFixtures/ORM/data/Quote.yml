@@ -1,0 +1,4 @@
+AppBundle\Entity\Quote:
+    quote0:
+        details: blabla
+        price: 20.20

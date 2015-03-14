@@ -46,3 +46,8 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+
+fos_rest:
+    exception:
+        enabled: false

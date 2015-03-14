@@ -1,0 +1,4 @@
+services:
+    my_mailer:
+        class:        Acme\HelloBundle\Mailer
+        arguments:    [sendmail]

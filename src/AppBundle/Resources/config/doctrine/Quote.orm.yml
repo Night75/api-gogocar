@@ -1,0 +1,13 @@
+AppBundle\Entity\Quote:
+    type:  entity
+    table: quote
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        details:
+            type: text
+        price:
+            type: float
