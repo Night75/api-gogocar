@@ -11,6 +11,8 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Util\Codes;
 
 abstract class BaseController extends FOSRestController
 {
@@ -22,7 +24,18 @@ abstract class BaseController extends FOSRestController
             throw new \Gogocar\Dto\Exception\ResourceNotFoundException();
         }
 
-        return $resource;
+        return $this->response($resource, Codes::HTTP_OK);
+    }
+
+    public function deleteAction($id)
+    {
+        try {
+            $this->getManager()->delete($id);
+        } catch (ResourceNotFoundException $e) {
+            throw new \Gogocar\Dto\Exception\ResourceNotFoundException();
+        }
+
+        return new Response('', Codes::HTTP_NO_CONTENT);
     }
 
     /**

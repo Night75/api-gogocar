@@ -11,10 +11,11 @@ class ClassUtils extends BaseUtils
      *
      * @param object $object
      * @param object $newObjectClass
+     * @param boolean $skipNullValues
      *
      * @return mixed
      */
-    public static function buildObjectFromAnother($object, $newObjectClass)
+    public static function buildObjectFromAnother($object, $newObjectClass, $skipNullValues = true)
     {
         $model = new $newObjectClass();
 
@@ -31,6 +32,10 @@ class ClassUtils extends BaseUtils
             }
             $getter = $rMethod->getName();
             $setter = 'set'. substr($getter, 3);
+
+            if ($skipNullValues && null === $object->$getter()) {
+                continue;
+            }
 
             if (method_exists($model, $setter)) {
                 $model->$setter($object->$getter());

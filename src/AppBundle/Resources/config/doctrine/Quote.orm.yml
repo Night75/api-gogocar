@@ -11,3 +11,13 @@ AppBundle\Entity\Quote:
             type: text
         price:
             type: float
+        createdAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                   on: update

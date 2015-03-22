@@ -25,6 +25,7 @@
         "nelmio/api-doc-bundle": "~2.7.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "hautelook/alice-bundle": "~0.2",
+        "gedmo/doctrine-extensions": "~2.2",
         "gogocar/dto": "dev-master"
     },
     "require-dev": {

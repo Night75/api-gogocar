@@ -3,7 +3,7 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Util\ClassUtils;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Manager\Exception\InvalidArgumentException;
 use AppBundle\Manager\Exception\ResourceNotFoundException;
 use Gogocar\Dto\Model\BaseModel;
@@ -11,9 +11,9 @@ use Gogocar\Dto\Model\BaseModel;
 abstract class AbstractManager
 {
     /**
-     * @var ObjectManager
+     * @var EntityManagerInterface
      */
-    protected $om;
+    protected $em;
 
     /**
      * @var \Doctrine\Common\Persistence\ObjectRepository
@@ -21,13 +21,13 @@ abstract class AbstractManager
     protected $repository;
 
     /**
-     * @param ObjectManager $om
+     * @param EntityManagerInterface $em
      * @param $class
      */
-    public function __construct(ObjectManager $om)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->om         = $om;
-        $this->repository = $om->getRepository($this->getEntityClass());
+        $this->em         = $em;
+        $this->repository = $em->getRepository($this->getEntityClass());
     }
 
     /**
@@ -57,8 +57,10 @@ abstract class AbstractManager
      */
     public function delete($id)
     {
-        $resource = $this->om->getReference($this->getEntityClass(), ['id' => $id]);
-        $this->om->remove($resource);
+        // $resource = $this->em->getReference($this->getEntityClass(), ['id' => $id]);
+        $resource = $this->get($id);
+        $this->em->remove($resource);
+        $this->em->flush();
     }
 
     /**
@@ -79,12 +81,12 @@ abstract class AbstractManager
                 ));
         }
 
-        if ($this->om->contains($entity)) {
+        if ($this->em->contains($entity)) {
             throw new InvalidArgumentException('This entity is already managed.');
         }
 
-        $this->om->persist($entity);
-        $this->om->flush();
+        $this->em->persist($entity);
+        $this->em->flush();
 
         return $entity;
     }

@@ -4,3 +4,9 @@ services:
         arguments:    [@fos_rest.view_handler, @logger]
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    app.query_param_listener:
+        class:        AppBundle\Listener\QueryParamListener
+        arguments:    [@fos_rest.request.param_fetcher.reader]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController, priority: 0  }
