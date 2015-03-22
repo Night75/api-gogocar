@@ -12,6 +12,8 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Util\Codes;
 
 abstract class BaseController extends FOSRestController
@@ -36,6 +38,23 @@ abstract class BaseController extends FOSRestController
         }
 
         return new Response('', Codes::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @QueryParam(name="id", requirements="\d+(,\d+)*", array=true, description="Id of the resource")
+     * @QueryParam(name="order", requirements="asc|desc", array=true, description="Sort order")
+     * @QueryParam(name="offset", requirements="\d+", description="Offset")
+     * @QueryParam(name="limit", requirements="\d+", description="Number of items")
+     *
+     * @param ParamFetcher $paramFetcher
+     *
+     * @return Response
+     *
+     * @throws \Gogocar\Dto\Exception\ResourceNotFoundException
+     */
+    public function cgetAction(ParamFetcher $paramFetcher)
+    {
+        return 2;
     }
 
     /**
@@ -76,14 +95,14 @@ abstract class BaseController extends FOSRestController
      */
     private function buildFormErrors(FormInterface $form)
     {
-        $data = array();
+        $data = [];
 
         foreach ($form->getErrors() as $error) {
-            $data['errors'][] = array(
+            $data['errors'][] = [
                 'message' => $error->getMessageTemplate(),
                 'parameters' => $error->getMessageParameters(),
                 'pluralization' => $error->getMessagePluralization(),
-            );
+            ];
         }
 
         foreach ($form as $child) {
@@ -108,7 +127,7 @@ abstract class BaseController extends FOSRestController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function response($data = null, $statusCode = null, array $headers = array())
+    public function response($data = null, $statusCode = null, array $headers = [])
     {
         return $this->handleView($this->view($data, $statusCode, $headers));
     }

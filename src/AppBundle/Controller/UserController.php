@@ -19,16 +19,6 @@ use AppBundle\Manager\AbstractManager;
  */
 class UserController extends BaseController implements ClassResourceInterface
 {
-    /**
-     * @ApiDoc(
-     *  section="User",
-     *  output=""
-     * )
-     */
-    public function cgetAction()
-    {
-
-    } // "get_users"     [GET] /users
 
     /**
      * @ApiDoc(

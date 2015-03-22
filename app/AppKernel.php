@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new Gomycar\ApiBundle\GomycarApiBundle(),
             new AppBundle\AppBundle(),
         );
 
@@ -47,18 +48,31 @@ class AppKernel extends Kernel
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getCacheDir()
     {
-        return '/tmp/cache/gomycar';
+        $cacheDir = getenv('SYMFONY__API_CACHE_DIR');
+
+        if (false !== $cacheDir) {
+            return rtrim($cacheDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $this->environment;
+        }
+
+        return parent::getCacheDir();
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @api
+     * {@inheritDoc}
      */
     public function getLogDir()
     {
-        return '/tmp/logs/gomycar';
+        $logDir = getenv('SYMFONY__API_LOG_DIR');
+
+        if (false !== $logDir) {
+            return rtrim($logDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        }
+
+        return parent::getLogDir();
     }
 }

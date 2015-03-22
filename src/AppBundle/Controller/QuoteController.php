@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration ;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as FE;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use Gomycar\ApiBundle\Controller\Annotations\InheritParam;
 use FOS\RestBundle\Util\Codes;
 
 /**
@@ -21,8 +22,8 @@ use FOS\RestBundle\Util\Codes;
 class QuoteController extends BaseController implements ClassResourceInterface
 {
     /**
-     *
-     * @QueryParam(name="id", requirements="\d+(,\d+)*", array=true, description="Id filters")
+     * @InheritParam(class="AppBundle\Controller\BaseController", method="cgetAction")
+     * @QueryParam(name="sort", requirements="createdAt|price", array=true, description="Sort fields")
      *
      * @ApiDoc(
      *  section="Quote",
@@ -31,12 +32,11 @@ class QuoteController extends BaseController implements ClassResourceInterface
      */
     public function cgetAction(ParamFetcher $paramFetcher)
     {
-        $dynamicQueryParam = new QueryParam();
-        $dynamicQueryParam->name = "dynamic_query";
-        $dynamicQueryParam->requirements="[a-z]+";
-        $paramFetcher->addParam($dynamicQueryParam);
-
         $d = $paramFetcher->get('id');
+        $sort = $paramFetcher->get('sort');
+        $order = $paramFetcher->get('order');
+        $offset = $paramFetcher->get('offset');
+        $limit = $paramFetcher->get('limit');
 
         $a = 2;
     }

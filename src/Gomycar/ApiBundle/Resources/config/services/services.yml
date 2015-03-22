@@ -1,0 +1,10 @@
+parameters:
+    fos_rest.request.param_fetcher.reader.class: Gomycar\ApiBundle\Request\ParamReader
+
+services:
+     gomycar.api.param_reader:
+         class: Gomycar\ApiBundle\Request\ParamReader
+         arguments: [@annotation_reader]
+
+#     fos_rest.request.param_fetcher.reader:
+#         alias: gomycar.api.param_reader

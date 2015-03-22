@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Manager\Exception\InvalidArgumentException;
 use AppBundle\Manager\Exception\ResourceNotFoundException;
 use Gogocar\Dto\Model\BaseModel;
+use Doctrine\Common\Collections\Collection;
 
 abstract class AbstractManager
 {
@@ -89,6 +90,18 @@ abstract class AbstractManager
         $this->em->flush();
 
         return $entity;
+    }
+
+    /**
+     *
+     *
+     * @param array $filters
+     *
+     * @return Collection
+     */
+    public function cget(array $filters, array $sortBy = [], $offset, $limit)
+    {
+        $aa = 2;
     }
 
     /**
